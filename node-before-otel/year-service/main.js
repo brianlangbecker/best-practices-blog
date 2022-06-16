@@ -9,9 +9,13 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 app.get('/year', async (req, res) => {
-  const year = await determineYear(years);
-  console.log(typeof year);
-  res.send(`${year}`);
+  try {
+    const year = await determineYear(years);
+    console.log(typeof year);
+    res.send(`${year}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022];

@@ -13,9 +13,13 @@ const yearURL = `http://${YEAR_ENDPOINT}/year`;
 // App
 const app = express();
 app.get('/name', async (req, res) => {
-  const year = await getYear(yearURL);
-  const name = determineName(year);
-  res.send(`${name}`);
+  try {
+    const year = await getYear(yearURL);
+    const name = determineName(year);
+    res.send(`${name}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 const names = new Map([
