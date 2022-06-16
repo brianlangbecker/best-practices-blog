@@ -15,9 +15,13 @@ const messageUrl = `http://${MESSAGE_ENDPOINT}/message`;
 // App
 const app = express();
 app.get('/greeting', async (req, res) => {
-  const name = await getName(nameUrl);
-  const message = await getMessage(messageUrl);
-  res.send(`Hello ${name}, ${message}`);
+  try {
+    const name = await getName(nameUrl);
+    const message = await getMessage(messageUrl);
+    res.send(`Hello ${name}, ${message}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 const getName = (url) =>
