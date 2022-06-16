@@ -9,11 +9,12 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 app.get('/message', async (req, res) => {
-  try { }
-  const message = await determineMessage(messages);
-  res.send(`${message}`);
-} catch (error) {
-  console.error(error);
+  try {
+    const message = await determineMessage(messages);
+    res.send(`${message}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 const messages = [
