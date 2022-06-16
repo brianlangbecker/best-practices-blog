@@ -1,0 +1,43 @@
+services:
+  frontend:
+    build: frontend
+    environment:
+      - NAME_ENDPOINT=name:8000
+      - MESSAGE_ENDPOINT=message:9000
+      - OTEL_SERVICE_NAME=node-frontend-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_HEADERS
+      - OTEL_RESOURCE_ATTRIBUTES
+    ports:
+      - 7000:7000
+
+  message:
+    build: message-service
+    environment:
+      - OTEL_SERVICE_NAME=node-message-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_HEADERS
+      - OTEL_RESOURCE_ATTRIBUTES
+    ports:
+      - 9000:9000
+
+  name:
+    build: name-service
+    environment:
+      - OTEL_SERVICE_NAME=node-name-service
+      - YEAR_ENDPOINT=year:6001
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_HEADERS
+      - OTEL_RESOURCE_ATTRIBUTES
+    ports:
+      - 8000:8000
+
+  year:
+    build: year-service
+    environment:
+      - OTEL_SERVICE_NAME=node-year-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_HEADERS
+      - OTEL_RESOURCE_ATTRIBUTES
+    ports:
+      - 6001:6001

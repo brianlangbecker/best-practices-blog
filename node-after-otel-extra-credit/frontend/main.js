@@ -23,12 +23,10 @@ app.get('/greeting', async (req, res) => {
     const name = await getName(nameUrl);
     nameSpan.setAttribute("person name", name);
     nameSpan.end();
-
     const messageSpan = opentelemetry.trace.getTracer('default').startSpan('call /message');
     const message = await getMessage(messageUrl);
     messageSpan.setAttribute("message", message);
     messageSpan.end();
-
     res.send(`Hello ${name}, ${message}`);
   } catch (error) {
     console.error(error);
